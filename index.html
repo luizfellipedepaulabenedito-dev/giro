@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Giro – Baixar o app</title>
+<meta name="description" content="Baixe o Giro para Android. Mototáxi em Carmo do Rio Claro, MG, com preço fixo de R$ 9.">
+<meta name="theme-color" content="#0b7a43">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: cabeçalho enxuto, hero em duas colunas (texto + botão | mapa da corrida), depois 3 diferenciais e passo a passo de instalação. */
+:root{
+  --bg:#f5f9f6;
+  --surface:#ffffff;
+  --fg:#0f1f17;
+  --muted:#52645a;
+  --line:#dbe6df;
+  --brand:#0b7a43;
+  --brand-hover:#096a3a;
+  --on-brand:#ffffff;
+  --brand-soft:#e3f1e8;
+  --map-block:#e9f0eb;
+  --map-street:#ffffff;
+  --shadow:0 1px 2px rgba(15,31,23,.06),0 10px 28px rgba(15,31,23,.08);
+  --font-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1511;--surface:#13201a;--fg:#eaf3ed;--muted:#9bb0a4;--line:#223429;
+    --brand:#2fa86a;--brand-hover:#3bb877;--on-brand:#06140c;--brand-soft:#16291f;
+    --map-block:#15241c;--map-street:#0c1511;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1511;--surface:#13201a;--fg:#eaf3ed;--muted:#9bb0a4;--line:#223429;
+  --brand:#2fa86a;--brand-hover:#3bb877;--on-brand:#06140c;--brand-soft:#16291f;
+  --map-block:#15241c;--map-street:#0c1511;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font:400 17px/1.6 var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px));
+  padding-block:0 max(40px,env(safe-area-inset-bottom,0px));
+}
+.wrap{max-width:1080px;margin-inline:auto}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:8px}
+
+/* topo */
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.brand{display:flex;align-items:center;gap:10px;font:800 22px/1 var(--font-display);letter-spacing:-.01em;text-decoration:none}
+.brand img{width:36px;height:36px;border-radius:10px}
+.top-note{font-size:14px;color:var(--muted)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-block:40px 64px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--brand);border-radius:2px}
+h1{
+  font:800 clamp(38px,6.2vw,66px)/1.02 var(--font-display);
+  letter-spacing:-.03em;margin:18px 0 18px;text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--brand)}
+.lead{font-size:19px;color:var(--muted);max-width:30em;margin:0 0 32px;text-wrap:pretty}
+
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--brand);color:var(--on-brand);
+  font:700 18px/1 var(--font-body);text-decoration:none;
+  padding:19px 28px;border-radius:14px;border:0;cursor:pointer;
+  box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 6px 16px rgba(11,122,67,.28);
+  transition:background .15s,transform .15s;
+}
+.btn:hover{background:var(--brand-hover);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn svg{width:22px;height:22px;flex:none}
+.meta{font-size:14px;color:var(--muted);line-height:1.5}
+.meta b{color:var(--fg);font-weight:600}
+.desktop-note{
+  display:none;margin:18px 0 0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;
+  background:var(--surface);font-size:15px;color:var(--muted);max-width:30em;
+}
+.is-desktop .desktop-note{display:block}
+
+/* mapa */
+.map{
+  position:relative;aspect-ratio:1/1.02;width:100%;
+  border:1px solid var(--line);border-radius:28px;background:var(--map-block);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.route{stroke-dasharray:1;stroke-dashoffset:0}
+.ticket{
+  position:absolute;left:6%;right:6%;bottom:6%;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;
+  box-shadow:var(--shadow);
+}
+.ticket img{width:46px;height:46px;border-radius:12px}
+.ticket .t1{font:700 16px/1.2 var(--font-display)}
+.ticket .t2{font-size:13px;color:var(--muted);margin-top:2px}
+.price{font:800 24px/1 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tag{position:absolute;z-index:2;top:18px;left:18px;font:600 12px/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:8px 10px;border-radius:999px}
+
+/* seções */
+section{padding-block:56px;border-top:1px solid var(--line)}
+h2{font:800 clamp(26px,3.6vw,36px)/1.1 var(--font-display);letter-spacing:-.02em;margin:0 0 28px;text-wrap:balance}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.features h3{font:700 19px/1.25 var(--font-display);margin:14px 0 6px}
+.features p{margin:0;color:var(--muted);font-size:16px}
+.ico{width:44px;height:44px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.ico svg{width:22px;height:22px}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font:700 15px/1 var(--font-display);margin-bottom:14px}
+.steps h3{font:700 18px/1.25 var(--font-display);margin:0 0 6px}
+.steps p{margin:0;color:var(--muted);font-size:15.5px}
+.safe{margin-top:22px;color:var(--muted);font-size:15px;max-width:46em}
+
+.hash{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:20px}
+.hash code{font:13px/1.4 var(--font-mono);color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:8px 10px;border-radius:10px;overflow-wrap:anywhere;min-width:0}
+.hash button{font:600 13px/1 var(--font-body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.hash button:hover{border-color:var(--brand);color:var(--brand)}
+
+footer{border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;color:var(--muted);font-size:14px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:40px;padding-block:20px 48px}
+  .features,.steps{grid-template-columns:1fr}
+  .features{gap:26px}
+  .top-note{display:none}
+  .btn{width:100%;justify-content:center}
+  .map{aspect-ratio:1/.9}
+}
+@media (prefers-reduced-motion:no-preference){
+  .route{stroke-dasharray:1;animation:draw 1.6s .2s ease-out both}
+  @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="#top" aria-label="Giro">
+      <img src="icon.png" alt="" width="36" height="36">Giro
+    </a>
+    <span class="top-note">Mototáxi em Carmo do Rio Claro, MG</span>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">App para Android</span>
+        <h1>Chamou, <em>girou.</em><br>Corrida fixa de R$&nbsp;9.</h1>
+        <p class="lead">O Giro conecta você a mototaxistas aprovados aqui em Carmo do Rio Claro. Sem negociar preço, sem esperar à toa.</p>
+
+        <div class="cta">
+          <a class="btn" id="download" href="Giro.apk" download="Giro.apk">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
+            Baixar para Android
+          </a>
+          <div class="meta"><b>Versão 1.0</b> · 5,6 MB<br>Android 6.0 ou mais novo</div>
+        </div>
+        <p class="desktop-note" id="desktopNote">Você está em um computador. Abra esta página no celular Android para instalar o Giro.</p>
+      </div>
+
+      <div class="map" aria-hidden="true">
+        <span class="tag">Exemplo de corrida</span>
+        <svg viewBox="0 0 400 408" preserveAspectRatio="xMidYMid slice">
+          <!-- ruas -->
+          <g stroke="var(--map-street)" stroke-width="14" stroke-linecap="round" fill="none">
+            <path d="M-10 90H410"/><path d="M-10 190H410"/><path d="M-10 290H410"/>
+            <path d="M70 -10V420"/><path d="M190 -10V420"/><path d="M310 -10V420"/>
+            <path d="M-10 360L170 240L410 40" stroke-width="10"/>
+          </g>
+          <!-- rota -->
+          <path class="route" pathLength="1" d="M70 290H190V190H310V90" fill="none" stroke="var(--brand)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- origem -->
+          <circle cx="70" cy="290" r="10" fill="var(--surface)" stroke="var(--brand)" stroke-width="5"/>
+          <!-- destino -->
+          <g transform="translate(310 90)">
+            <path d="M0 -4C-14 -22 -22 -34 -22 -46a22 22 0 0 1 44 0c0 12-8 24-22 42z" fill="var(--brand)"/>
+            <circle cx="0" cy="-46" r="8" fill="var(--surface)"/>
+          </g>
+        </svg>
+        <div class="ticket">
+          <img src="icon.png" alt="">
+          <div><div class="t1">Mototaxista a caminho</div><div class="t2">Código de início: 4 8 2 1</div></div>
+          <div class="price">R$&nbsp;9</div>
+        </div>
+      </div>
+    </div>
+
+    <section aria-labelledby="h-vantagens">
+      <h2 id="h-vantagens">Pensado para a cidade</h2>
+      <div class="features">
+        <div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2c-.5-.8-1.5-1.2-2.8-1.2-1.7 0-2.8.8-2.8 2s1 1.7 2.8 2 2.8.8 2.8 2-1.1 2-2.8 2c-1.3 0-2.3-.4-2.8-1.2"/><path d="M12 6.5V8m0 8v1.5"/></svg></div>
+          <h3>Preço fixo</h3>
+          <p>R$ 9 em qualquer corrida dentro de Carmo do Rio Claro. Você sabe quanto vai pagar antes de pedir.</p>
+        </div>
+        <div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <h3>Código de início</h3>
+          <p>A corrida só começa quando você passa o código ao mototaxista. Mais segurança para os dois lados.</p>
+        </div>
+        <div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></div>
+          <h3>Mototaxistas aprovados</h3>
+          <p>O mais próximo recebe o chamado primeiro. Depois da corrida, você dá de 1 a 5 estrelas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-instalar">
+      <h2 id="h-instalar">Como instalar</h2>
+      <ol class="steps">
+        <li><h3>Baixe o arquivo</h3><p>Toque em “Baixar para Android”. Se o navegador avisar sobre o tipo de arquivo, escolha manter.</p></li>
+        <li><h3>Permita a instalação</h3><p>Abra o arquivo Giro.apk. Se o Android pedir, ative “Permitir desta fonte” para o seu navegador.</p></li>
+        <li><h3>Abra e crie sua conta</h3><p>Toque em Instalar, depois em Abrir. Cadastre-se como passageiro ou mototaxista.</p></li>
+      </ol>
+      <p class="safe">O Giro ainda não está na Play Store, por isso o Android mostra um aviso de app de fora da loja. Baixe sempre por esta página.</p>
+
+      <div class="hash">
+        <code id="hashText">SHA-256: 0d85c6c21ffc99565ff7dfa0481a10a670ed1dd3c5526da49eaf091cc45b850b</code>
+        <button type="button" id="copyHash">Copiar código</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Giro · Carmo do Rio Claro, MG</span>
+    <span>br.com.giro.app · versão 1.0</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var ua = navigator.userAgent || "";
+  if(!/Android/i.test(ua)) document.documentElement.classList.add("is-desktop");
+
+  var btn = document.getElementById("copyHash");
+  var txt = "0d85c6c21ffc99565ff7dfa0481a10a670ed1dd3c5526da49eaf091cc45b850b";
+  btn.addEventListener("click", function(){
+    function done(){ btn.textContent = "Copiado"; setTimeout(function(){ btn.textContent = "Copiar código"; }, 1800); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ selectIt(); });
+    } else { selectIt(); }
+    function selectIt(){
+      var r = document.createRange(); r.selectNodeContents(document.getElementById("hashText"));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    }
+  });
+})();
+</script>
+</body>
+</html>
